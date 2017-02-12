@@ -62,10 +62,18 @@
  *
  */
 export function is(alpha, beta) {
-  const alphaValue = (null !== alpha && undefined !== alpha && typeof alpha.valueOf === 'function') ? alpha.valueOf() : alpha;
-  const betaValue = (null !== beta && undefined !== beta && typeof beta.valueOf === 'function') ? beta.valueOf() : beta;
+  const alphaValue = (
+    null !== alpha && undefined !== alpha && typeof alpha.valueOf === 'function'
+  ) ? alpha.valueOf() : alpha;
 
-  if (alphaValue === betaValue || (alphaValue !== alphaValue && betaValue !== betaValue)) {
+  const betaValue = (
+    null !== beta && undefined !== beta && typeof beta.valueOf === 'function'
+  ) ? beta.valueOf() : beta;
+
+  if (
+    alphaValue === betaValue ||
+    (alphaValue !== alphaValue && betaValue !== betaValue)
+  ) {
     return true;
   }
   if (!alphaValue || !betaValue) {
