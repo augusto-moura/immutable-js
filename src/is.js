@@ -61,27 +61,20 @@
  * All Immutable collections implement `equals` and `hashCode`.
  *
  */
-export function is(valueA, valueB) {
-  if (valueA === valueB || (valueA !== valueA && valueB !== valueB)) {
+export function is(alpha, beta) {
+  const alphaValue = (null !== alpha && undefined !== alpha && typeof alpha.valueOf === 'function') ? alpha.valueOf() : alpha;
+  const betaValue = (null !== beta && undefined !== beta && typeof beta.valueOf === 'function') ? beta.valueOf() : beta;
+
+  if (alphaValue === betaValue || (alphaValue !== alphaValue && betaValue !== betaValue)) {
     return true;
   }
-  if (!valueA || !valueB) {
+  if (!alphaValue || !betaValue) {
     return false;
   }
-  if (typeof valueA.valueOf === 'function' &&
-      typeof valueB.valueOf === 'function') {
-    valueA = valueA.valueOf();
-    valueB = valueB.valueOf();
-    if (valueA === valueB || (valueA !== valueA && valueB !== valueB)) {
-      return true;
-    }
-    if (!valueA || !valueB) {
-      return false;
-    }
-  }
-  if (typeof valueA.equals === 'function' &&
-      typeof valueB.equals === 'function' &&
-      valueA.equals(valueB)) {
+
+  if (typeof alphaValue.equals === 'function' &&
+    typeof betaValue.equals === 'function' &&
+    alphaValue.equals(betaValue)) {
     return true;
   }
   return false;
